@@ -97,6 +97,7 @@ def _parallel_predict_proba_scoring(estimators, X, index):
                 raise Exception (" predictions' shape not equal among estimators within the  batch as %d!=%d " % (predictions.shape[1],preds.shape[1]))
                 
             preds+=predictions
+    preds = preds.astype('float') # resolves TypeError of casting rule "same kind" by making left operand a float to be divided by float below
     preds/=float(len(estimators))
 
     return preds,index
